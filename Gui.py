@@ -1,7 +1,6 @@
 import sys
 
-from PyQt5.QtCore import QRect
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QLineEdit, QLabel, QPushButton,)
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QWidget, QHBoxLayout,)
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -9,27 +8,58 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("MyApp")
         self.setGeometry(300, 300, 500, 500)
-        self.line_edit = QLineEdit(self)
-        self.label = QLabel("toi bi dien co nao: ", self)
-        self.button = QPushButton("Submit", self)
+
+        self.button1 = QPushButton("NGU 1")
+        self.button2 = QPushButton("NGU 2")
+        self.button3 = QPushButton("NGU 3")
+
         self.initUI()
 
-    def initUI(self):
-        self.label.setGeometry(10,0,300,50)
-        self.line_edit.setGeometry(10, 50, 300, 50)
-        self.button.setGeometry(310, 50, 125, 50)
-        self.label.setStyleSheet("font-size:25px;"
-                                     "font-family:Verdana;")
-        self.line_edit.setStyleSheet("font-size:25px;"
-                                     "font-family:Verdana;")
-        self.button.setStyleSheet("font-size:25px;"
-                                     "font-family:Verdana;")
-        self.line_edit.setPlaceholderText("how you stupid")
-        self.button.clicked.connect(self.submit)
 
-    def submit(self):
-        text = self.line_edit.text()
-        print(f"ban ngu co {text}")
+    def initUI(self):
+        central_widget = QWidget()
+        self.setCentralWidget(central_widget)
+
+        hbox = QHBoxLayout()
+
+        hbox.addWidget(self.button1)
+        hbox.addWidget(self.button2)
+        hbox.addWidget(self.button3)
+
+        central_widget.setLayout(hbox)
+
+        self.button1.setObjectName("button1")
+        self.button2.setObjectName("button2")
+        self.button3.setObjectName("button3")
+
+        self.setStyleSheet("""
+            QPushButton{
+                font-size: 40px;
+                font-family: Verdana;
+                padding: 5px;
+                margin: 5px;
+                border: 5px solid gray;
+                border-radius: 15px;
+            }
+            QPushButton#button1{
+                background-color: green;
+            } 
+            QPushButton#button2{
+                background-color: blue;
+            } 
+            QPushButton#button3{
+                background-color: purple;
+            }
+            QPushButton#button1:hover{
+                background-color: gray;
+            } 
+            QPushButton#button2:hover{
+                background-color: gray;
+            } 
+            QPushButton#button3:hover{
+                background-color: gray;
+            }  
+        """)
 
 
 def main():
